@@ -35,7 +35,24 @@ class LoginSerializer(serializers.Serializer):
 
   def create(self, data):
     user = self.context.get('user')
-    token, = Token.objects.get_or_create(user=user)
+    token, _ = Token.objects.get_or_create(user=user)
     return user, token.key
   
   
+class RegisterSerializer(serializers.Serializer):
+  username = serializers.CharField(min_length=4, max_length=16)
+  password = serializers.CharField(min_length=4, max_length=64)
+
+  def validate(self, data):
+    user_exists = User.objects.filter(username=data.get('username')).exists()
+    
+    if user_exists:
+      raise serializers.ValidationError('El nombre de usuario ya existe')
+    
+    return data
+
+  def create(self, data):
+    user = User(username=data.get('username'))
+    user.set_password(data.get('password'))
+    user.save()
+    return user
