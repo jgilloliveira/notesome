@@ -7,10 +7,8 @@ from rest_framework.permissions import IsAuthenticated
 class NoteView(BaseModelViewSet):
   serializer_class = NoteSerializer
 
-  def get_queryset(self):
-    user = self.request.user
-    
-    return user.notes.all()
+  def get_queryset(self):  
+    return self.request.user.notes.all()
   
 
 
