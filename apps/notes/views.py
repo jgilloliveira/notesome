@@ -1,6 +1,6 @@
 from api_rest.views import BaseModelViewSet
 from apps.notes.serializers import NoteSerializer
-
+from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated
 
 
@@ -9,7 +9,3 @@ class NoteView(BaseModelViewSet):
 
   def get_queryset(self):  
     return self.request.user.notes.all()
-  
-
-
-

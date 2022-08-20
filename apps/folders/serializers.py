@@ -7,6 +7,7 @@ class ChildFolderSerializer(BaseModelSerializer):
 
   user = serializers.HiddenField(default=serializers.CurrentUserDefault())
 
+
   class Meta:
     model = Folder
     fields = '__all__'
@@ -21,4 +22,3 @@ class FolderSerializer(BaseModelSerializer):
   class Meta:
     model = Folder
     fields = '__all__'
-    
