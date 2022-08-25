@@ -9,6 +9,6 @@ class Note (BaseModel):
   is_favorite = models.BooleanField(default=False)
   is_deleted = models.BooleanField(default=False)
 
-  parent_folder = models.ForeignKey("folders.Folder", verbose_name="parent_folder", null=True, blank=True, on_delete=models.CASCADE)
-  categories = models.ManyToManyField("categories.Category", verbose_name="categories", blank=True, related_name='notes')
+  folder = models.ForeignKey("folders.Folder", related_name='notes', null=True, blank=True, on_delete=models.CASCADE)
+  categories = models.ManyToManyField("categories.Category", blank=True, related_name='notes')
   user = models.ForeignKey("users.User", related_name='notes', on_delete=models.CASCADE)

@@ -52,6 +52,7 @@ THIRD_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'corsheaders',
+    'django_filters',
 ]
 
 INSTALLED_APPS = BASE_APPS + CUSTOME_APPS + THIRD_APPS
