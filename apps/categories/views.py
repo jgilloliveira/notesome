@@ -1,12 +1,13 @@
 from api_rest.views import BaseModelViewSet
 from apps.categories.serializers import CategorySerializer
-from apps.notes.serializers import NoteSerializer
-from rest_framework.response import Response
-from rest_framework.decorators import action
+from rest_framework.filters import SearchFilter, OrderingFilter
 
 
 class CategoryView(BaseModelViewSet):
   serializer_class = CategorySerializer
+  filter_backends = [SearchFilter, OrderingFilter]
+  search_fields = ["name"]
+  ordering_fields = ['creation_date', 'modified_date', "name"]
 
   def get_queryset(self):
     return self.request.user.categories.all()
@@ -15,7 +16,7 @@ class CategoryView(BaseModelViewSet):
   #   request.data['user'] = request.user.id
   #   return super().create(request, *args, **kwargs)
 
-  @action(detail=True, methods=['get'], url_name='notes')
-  def notes(self, request, pk):
-    data = NoteSerializer(self.get_object().notes.all(), many=True).data
-    return Response(data)
+  # @action(detail=True, methods=['get'], url_name='notes')
+  # def notes(self, request, pk):
+  #   data = NoteSerializer(self.get_object().notes.all(), many=True).data
+  #   return Response(data)
