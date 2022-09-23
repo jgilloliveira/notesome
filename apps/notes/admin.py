@@ -6,6 +6,7 @@ from apps.notes.models import Note
 @admin.register(Note)
 class InvitationAdmin(admin.ModelAdmin):
   list_display = (
+    'id',
     'title',
     'content',
     'color',

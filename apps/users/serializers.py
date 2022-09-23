@@ -26,9 +26,13 @@ class LoginSerializer(serializers.Serializer):
     user = authenticate(username=data.get('username'), password=data.get('password'))
 
     if user is None:
-      raise serializers.ValidationError("El usuario no existe. :c")
+      raise serializers.ValidationError({
+        "error": "El usuario no existe o la contraseña es incorrecta. :c",
+      })
     if not user.is_active:
-      raise serializers.ValidationError("El usuario no está activo.")
+      raise serializers.ValidationError({
+        "username": "El usuario no está activo.",
+      })
 
     self.context['user'] = user
     return data
@@ -47,7 +51,9 @@ class RegisterSerializer(serializers.Serializer):
     user_exists = User.objects.filter(username=data.get('username')).exists()
     
     if user_exists:
-      raise serializers.ValidationError('El nombre de usuario ya existe')
+      raise serializers.ValidationError({
+        'username': 'El nombre de usuario ya existe'
+      })
     
     return data
 
