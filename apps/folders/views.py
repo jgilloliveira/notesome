@@ -7,7 +7,8 @@ from django_filters.rest_framework import DjangoFilterBackend
 class FolderView(BaseModelViewSet):
   serializer_class = FolderSerializer
   filter_backends = [SearchFilter, OrderingFilter, DjangoFilterBackend]
-  filterset_fields = ['parent_folder']
+  # filterset_fields = ['parent_folder']
+  filterset_fields = {'parent_folder': ['exact', 'isnull']}
   search_fields = ["name"]
   ordering_fields = ['creation_date', 'modified_date', "name"]
 
