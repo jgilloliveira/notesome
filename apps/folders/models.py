@@ -9,21 +9,17 @@ class Folder (BaseModel):
   user = models.ForeignKey('users.User', on_delete=models.CASCADE, related_name='folders')
 
   @property
-  def url(self) -> list(dict):
+  def url(self) -> list:
 
     folder = self
     result = []
-    while(folder.parent_folder is not None):
-      result.append({ 
+    while folder is not None:
+      result.insert(0,{ 
         "id": folder.id, 
         "name": folder.name 
       })
-      folder = self.parent_folder
-
-    result.append({
-      "id": folder.id, 
-      "name": folder.name
-    })
+      folder = folder.parent_folder
+      
     return result
 
   # @property

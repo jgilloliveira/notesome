@@ -31,6 +31,7 @@ class FolderSerializer(BaseModelSerializer):
   user = serializers.HiddenField(default=serializers.CurrentUserDefault())
   child_folders = ChildFolderSerializer(read_only=True, many=True)
   parent_folder = ReadByIdField(ChildFolderSerializer)
+  url = serializers.ReadOnlyField()
 
   class Meta:
     model = Folder
