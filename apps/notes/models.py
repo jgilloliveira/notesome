@@ -3,8 +3,8 @@ from api_rest.models import BaseModel
 
 
 class Note (BaseModel):
-  title = models.TextField(blank="")
-  content = models.TextField(blank="")
+  title = models.TextField(blank=True, default="")
+  content = models.TextField(blank=True, default="")
   color = models.CharField(max_length=10, default="#FFF")
   is_favorite = models.BooleanField(default=False)
   is_deleted = models.BooleanField(default=False)
