@@ -16,8 +16,8 @@ class FolderView(BaseModelViewSet):
     return self.request.user.folders.all()
 
   def get_serializer_class(self):
-    if self.action == 'retrieve':
-      return super().get_serializer_class()
-    return ChildFolderSerializer
+    if self.action == 'list':
+      return ChildFolderSerializer
+    return super().get_serializer_class()
 
   
