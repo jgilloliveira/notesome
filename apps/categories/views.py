@@ -8,6 +8,7 @@ class CategoryView(BaseModelViewSet):
   filter_backends = [SearchFilter, OrderingFilter]
   search_fields = ["name"]
   ordering_fields = ['creation_date', 'modified_date', "name"]
+  ordering = ["name"]
 
   def get_queryset(self):
     return self.request.user.categories.all()
