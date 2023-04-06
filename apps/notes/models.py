@@ -25,3 +25,6 @@ class Note (BaseModel):
   def save(self, *arg, **karg):
     self.validate()
     return super().save(*arg, **karg)
+  
+  def __str__(self):
+    return self.title

@@ -16,6 +16,9 @@ class Category (BaseModel):
       return word[:2].upper()
     else:
       return word[0].upper()
+    
+  def __str__(self):
+    return self.name
 
 ''' 
 1) Lógica simple y relacionado al modelo -> En el modelo
